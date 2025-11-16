@@ -58,38 +58,37 @@ namespace Appodeal.Solitaire
 
         public void AddCard(CardController card)
         {
+            if (m_Cards.Count > 0)
+            {
+                m_Cards[^1]
+                    .SetInteractable(false);
+            }
+
+            card.SetInteractable(true);
+
             m_Cards.Add(card);
             RectTransform rect = card.RectTransform;
             rect.SetParent(m_RectTransform, false);
             rect.SetAsLastSibling();
             rect.anchoredPosition = new Vector2(0, -m_Spacing * (m_Cards.Count - 1));
-            card.UpdateStackIndex(Index);
+            card.UpdateStack(Index);
         }
 
         public bool RemoveCard(CardController card)
         {
             bool removed = m_Cards.Remove(card);
 
-            if (removed)
+            if (!removed)
+                return false;
+
+            if (m_Cards.Count > 0)
             {
-                card.UpdateStackIndex(-1);
-                Refresh();
+                m_Cards[^1]
+                    .SetInteractable(true);
             }
 
-            return removed;
-        }
-
-        public bool IsTop(CardController card)
-        {
-            return m_Cards.Count > 0 && m_Cards[^1] == card;
-        }
-
-        public void Refresh()
-        {
-            for (int i = 0; i < m_Cards.Count; i++)
-            {
-                m_Cards[i].RectTransform.anchoredPosition = new Vector2(0, -m_Spacing * i);
-            }
+            card.UpdateStack(-1);
+            return true;
         }
 
         public event Action<CardController, int> CardDrop;

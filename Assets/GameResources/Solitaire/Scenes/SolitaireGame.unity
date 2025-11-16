@@ -899,7 +899,7 @@ MonoBehaviour:
   m_CardPrefab: {fileID: 138000005, guid: 3bf11500b081435cb44783056d2778ee, type: 3}
   m_CardsPerStack: 4
   m_DragLayer: {fileID: 1371000501}
-  m_MaxUndoActions: 3
+  m_MaxUndoActions: 10
   m_StackCount: 3
   m_StackHorizontalSpacing: 40
   m_StackPrefab: {fileID: 137000005, guid: 69c71398d15c4dcfa3d7629ea5790028, type: 3}

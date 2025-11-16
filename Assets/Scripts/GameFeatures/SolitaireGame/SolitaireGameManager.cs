@@ -45,58 +45,38 @@ namespace Appodeal.Solitaire
         private Button m_UndoButton;
 
         private readonly List<StackController> m_Stacks = new();
-        private readonly Dictionary<CardController, int> m_DragSources = new();
-        private readonly List<MoveRecord> m_MoveHistory = new();
+
+        private UndoManager m_UndoManager;
+        private bool m_IsCardDroppedOnStack;
 
         private void Awake()
         {
+            m_UndoManager = new UndoManager(m_MaxUndoActions, this);
             CreateStacks();
-            SpawnCards();
+            List<CardModel> deck = GenerateDeckData(m_Stacks.Count * m_CardsPerStack);
+            SpawnCards(deck);
             HookUndoButton();
-            UpdateUndoState();
+            UpdateUndoButtonView();
         }
 
-        private void HandleBeginDrag(CardController card)
+        public void PlaceCardOnStack(int stackIndex, CardController card)
         {
-            if (card.CurrentStackIndex < 0)
+            if (stackIndex < 0 || stackIndex >= m_Stacks.Count)
                 return;
 
-            StackController sourceStack = m_Stacks[card.CurrentStackIndex];
+            StackController originStack = m_Stacks[card.CurrentStackIndex];
+            originStack.RemoveCard(card);
 
-            if (!sourceStack.IsTop(card) || m_DragSources.ContainsKey(card))
-                return;
-
-            sourceStack.RemoveCard(card);
-            m_DragSources[card] = sourceStack.Index;
-            card.UpdateStackIndex(-1);
-        }
-
-        private void HandleEndDrag(CardController card, bool dropSucceeded)
-        {
-            if (!m_DragSources.TryGetValue(card, out int originStack))
-                return;
-
-            if (!dropSucceeded)
-                PlaceCardOnStack(originStack, card);
-
-            m_DragSources.Remove(card);
-        }
-
-        private void HandleCardDrop(CardController card, int targetStackIndex)
-        {
-            bool result = TryPlaceCardOnStack(card, targetStackIndex, true);
-            card.NotifyDropResult(result);
+            StackController stack = m_Stacks[stackIndex];
+            stack.AddCard(card);
         }
 
         private void CreateStacks()
         {
             m_Stacks.Clear();
 
-            if (m_StackPrefab == null || m_BoardRoot == null)
-                return;
-
             RectTransform prefabRect = m_StackPrefab.GetComponent<RectTransform>();
-            float stackWidth = prefabRect != null ? prefabRect.sizeDelta.x : 220f;
+            float stackWidth = prefabRect.sizeDelta.x;
 
             for (int stackIndex = 0; stackIndex < m_StackCount; stackIndex++)
             {
@@ -112,15 +92,11 @@ namespace Appodeal.Solitaire
             }
         }
 
-        private void SpawnCards()
+        private void SpawnCards(List<CardModel> deck)
         {
             if (m_Stacks.Count == 0)
                 return;
 
-            if (m_CardPrefab == null)
-                return;
-
-            List<CardConfig> deck = GenerateDeckData(m_Stacks.Count * m_CardsPerStack);
             int index = 0;
 
             foreach (StackController stack in m_Stacks)
@@ -134,74 +110,81 @@ namespace Appodeal.Solitaire
             }
         }
 
-        private CardController CreateCard(CardConfig config)
+        private CardController CreateCard(CardModel model)
         {
             CardController card = Instantiate(m_CardPrefab, m_BoardRoot);
-            card.name = config.Label;
-            card.Construct(m_DragLayer, config);
+            card.name = model.Label;
+            card.Construct(m_DragLayer, model);
             card.BeginDrag += HandleBeginDrag;
             card.EndDrag += HandleEndDrag;
             return card;
         }
 
-        private static List<CardConfig> GenerateDeckData(int total)
+        private static List<CardModel> GenerateDeckData(int total)
         {
-            var deck = new List<CardConfig>(Mathf.Max(0, total));
+            var deck = new List<CardModel>(Mathf.Max(0, total));
 
             for (int i = 0; i < total; i++)
             {
                 float hue = i / (float)total;
                 Color color = Color.HSVToRGB(hue, 0.55f, 0.95f);
-                deck.Add(new CardConfig($"Card {i + 1}", color));
+                CardModel cardModel = new($"Card_{i + 1}", color);
+                deck.Add(cardModel);
             }
 
             return deck;
         }
 
-        private bool TryPlaceCardOnStack(CardController card, int targetStackIndex, bool recordHistory)
+        private void HandleCardDrop(CardController card, int targetStackIndex)
         {
-            if (!m_DragSources.TryGetValue(card, out int originStack))
-                return false;
+            m_IsCardDroppedOnStack = true;
+            bool result = TryPlaceCardOnStack(card, targetStackIndex);
 
+            if (result)
+                return;
+
+            int originStackIndex = card.CurrentStackIndex;
+            PlaceCardOnStack(originStackIndex, card);
+        }
+
+        private void HandleBeginDrag(CardController card)
+        {
+            m_IsCardDroppedOnStack = false;
+        }
+
+        private void HandleEndDrag(CardController card)
+        {
+            if (m_IsCardDroppedOnStack)
+                return;
+
+            PlaceCardOnStack(card.CurrentStackIndex, card);
+        }
+
+        private bool TryPlaceCardOnStack(CardController card, int targetStackIndex)
+        {
             if (targetStackIndex < 0 || targetStackIndex >= m_Stacks.Count)
                 return false;
 
-            if (originStack == targetStackIndex)
+            StackController originStack = m_Stacks[card.CurrentStackIndex];
+
+            if (originStack.Index == targetStackIndex)
                 return false;
 
             PlaceCardOnStack(targetStackIndex, card);
-
-            if (recordHistory)
-                RegisterMove(new MoveRecord(card, originStack, targetStackIndex));
-
+            MoveRecord moveRecord = new(card, originStack.Index, targetStackIndex);
+            RecordMove(moveRecord);
             return true;
         }
 
-        private void PlaceCardOnStack(int stackIndex, CardController card)
+        private void RecordMove(MoveRecord record)
         {
-            if (stackIndex < 0 || stackIndex >= m_Stacks.Count)
-                return;
-
-            StackController stack = m_Stacks[stackIndex];
-            stack.AddCard(card);
+            m_UndoManager.RecordMove(record);
+            UpdateUndoButtonView();
         }
 
-        private void RegisterMove(MoveRecord record)
+        private void UpdateUndoButtonView()
         {
-            m_MoveHistory.Add(record);
-
-            if (m_MoveHistory.Count > m_MaxUndoActions)
-                m_MoveHistory.RemoveAt(0);
-
-            UpdateUndoState();
-        }
-
-        private void UpdateUndoState()
-        {
-            if (m_UndoButton == null)
-                return;
-
-            m_UndoButton.interactable = m_MoveHistory.Count > 0;
+            m_UndoButton.interactable = m_UndoManager.RecordsCount > 0;
         }
 
         private void HookUndoButton()
@@ -211,21 +194,8 @@ namespace Appodeal.Solitaire
 
         private void UndoLastMove()
         {
-            if (m_MoveHistory.Count == 0)
-                return;
-
-            int lastIndex = m_MoveHistory.Count - 1;
-            MoveRecord move = m_MoveHistory[lastIndex];
-            m_MoveHistory.RemoveAt(lastIndex);
-
-            if (move.Card.CurrentStackIndex >= 0 && move.Card.CurrentStackIndex < m_Stacks.Count)
-            {
-                m_Stacks[move.Card.CurrentStackIndex]
-                    .RemoveCard(move.Card);
-            }
-
-            PlaceCardOnStack(move.FromStack, move.Card);
-            UpdateUndoState();
+            m_UndoManager.UndoMove();
+            UpdateUndoButtonView();
         }
     }
 }

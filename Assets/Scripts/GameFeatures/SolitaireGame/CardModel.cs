@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace Appodeal.Solitaire
 {
-    public readonly struct CardConfig
+    public readonly struct CardModel
     {
-        public CardConfig(string label, Color accent)
+        public CardModel(string label, Color accent)
         {
             Label = label;
             Color = accent;

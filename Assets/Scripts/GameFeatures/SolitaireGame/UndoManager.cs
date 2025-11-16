@@ -34,7 +34,7 @@ namespace Appodeal.Solitaire
             MoveRecord move = m_MoveHistory[lastIndex];
             m_MoveHistory.RemoveAt(lastIndex);
 
-            m_GameManager.PlaceCardOnStack(move.FromStack, move.Card);
+            m_GameManager.RestoreMove(move);
         }
     }
 }

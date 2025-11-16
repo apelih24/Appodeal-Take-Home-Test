@@ -61,14 +61,35 @@ namespace Appodeal.Solitaire
 
         public void PlaceCardOnStack(int stackIndex, CardController card)
         {
-            if (stackIndex < 0 || stackIndex >= m_Stacks.Count)
+            if (card == null || stackIndex < 0 || stackIndex >= m_Stacks.Count)
                 return;
 
-            StackController originStack = m_Stacks[card.CurrentStackIndex];
-            originStack.RemoveCard(card);
+            if (card.CurrentStackIndex >= 0 && card.CurrentStackIndex < m_Stacks.Count)
+            {
+                StackController originStack = m_Stacks[card.CurrentStackIndex];
+                originStack.RemoveCard(card);
+            }
 
             StackController stack = m_Stacks[stackIndex];
             stack.AddCard(card);
+        }
+
+        public void RestoreMove(MoveRecord move)
+        {
+            if (move.Card == null)
+                return;
+
+            if (move.ToStack >= 0 && move.ToStack < m_Stacks.Count)
+            {
+                m_Stacks[move.ToStack]
+                    .RemoveCard(move.Card);
+            }
+
+            if (move.FromStack >= 0 && move.FromStack < m_Stacks.Count)
+            {
+                m_Stacks[move.FromStack]
+                    .AddCard(move.Card);
+            }
         }
 
         private void CreateStacks()

@@ -34,6 +34,9 @@ namespace Appodeal.Solitaire
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            if (!m_CanvasGroup.interactable)
+                return;
+
             m_CanvasGroup.blocksRaycasts = false;
 
             m_IsDragging = true;
@@ -63,7 +66,7 @@ namespace Appodeal.Solitaire
                 return;
 
             m_IsDragging = false;
-            m_CanvasGroup.blocksRaycasts = true;
+            m_CanvasGroup.blocksRaycasts = m_CanvasGroup.interactable;
             EndDrag?.Invoke(this);
         }
 
@@ -85,7 +88,7 @@ namespace Appodeal.Solitaire
         public void SetInteractable(bool isInteractable)
         {
             m_CanvasGroup.interactable = isInteractable;
-            m_FaceImage.raycastTarget = isInteractable;
+            m_CanvasGroup.blocksRaycasts = isInteractable;
         }
 
         public event Action<CardController> BeginDrag;

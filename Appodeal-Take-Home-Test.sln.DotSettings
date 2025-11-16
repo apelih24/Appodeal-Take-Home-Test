@@ -1,0 +1,595 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/CodeEditing/Intellisense/CodeCompletion/IntelliSenseCompletingCharacters/CSharpCompletingCharacters/UpgradedFromVSSettings/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/CodeEditing/Unity/AdditionalFileLayout/Pattern/@EntryValue">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;Patterns xmlns="urn:schemas-jetbrains-com:member-reordering-patterns"&gt;
+    &lt;TypePattern DisplayName="Non-reorderable types"&gt;
+        &lt;TypePattern.Match&gt;
+            &lt;Or&gt;
+                &lt;And&gt;
+                    &lt;Kind Is="Interface" /&gt;
+                    &lt;Or&gt;
+                        &lt;HasAttribute Name="System.Runtime.InteropServices.InterfaceTypeAttribute" /&gt;
+                        &lt;HasAttribute Name="System.Runtime.InteropServices.ComImport" /&gt;
+                    &lt;/Or&gt;
+                &lt;/And&gt;
+                &lt;Kind Is="Struct" /&gt;
+                &lt;HasAttribute Name="JetBrains.Annotations.NoReorderAttribute" /&gt;
+                &lt;HasAttribute Name="JetBrains.Annotations.NoReorder" /&gt;
+            &lt;/Or&gt;
+        &lt;/TypePattern.Match&gt;
+    &lt;/TypePattern&gt;
+    &lt;TypePattern DisplayName="Default Pattern"&gt;
+        &lt;Entry Priority="100" DisplayName="Public Delegates"&gt;
+            &lt;Entry.Match&gt;
+                &lt;And&gt;
+                    &lt;Access Is="Public" /&gt;
+                    &lt;Kind Is="Delegate" /&gt;
+                &lt;/And&gt;
+            &lt;/Entry.Match&gt;
+            &lt;Entry.SortBy&gt;
+                &lt;Name /&gt;
+            &lt;/Entry.SortBy&gt;
+        &lt;/Entry&gt;
+        &lt;Entry Priority="100" DisplayName="Public Enums"&gt;
+            &lt;Entry.Match&gt;
+                &lt;And&gt;
+                    &lt;Access Is="Public" /&gt;
+                    &lt;Kind Is="Enum" /&gt;
+                &lt;/And&gt;
+            &lt;/Entry.Match&gt;
+            &lt;Entry.SortBy&gt;
+                &lt;Name /&gt;
+            &lt;/Entry.SortBy&gt;
+        &lt;/Entry&gt;
+        &lt;Entry DisplayName="Serializable Fields"&gt;
+            &lt;Entry.Match&gt;
+                &lt;And&gt;
+                    &lt;Kind Is="Field" /&gt;
+                    &lt;HasAttribute Name="UnityEngine.SerializeField" /&gt;
+                    &lt;Not&gt;
+                        &lt;Static /&gt;
+                    &lt;/Not&gt;
+                    &lt;Not&gt;
+                        &lt;Readonly /&gt;
+                    &lt;/Not&gt;
+                &lt;/And&gt;
+            &lt;/Entry.Match&gt;
+            &lt;Entry.SortBy&gt;
+                &lt;Name /&gt;
+            &lt;/Entry.SortBy&gt;
+        &lt;/Entry&gt;
+        &lt;Entry DisplayName="Fields"&gt;
+            &lt;Entry.Match&gt;
+                &lt;And&gt;
+                    &lt;Kind Is="Field" /&gt;
+                    &lt;Not&gt;
+                        &lt;Static /&gt;
+                    &lt;/Not&gt;
+                    &lt;Not&gt;
+                        &lt;HasAttribute Name="UnityEngine.SerializeField" /&gt;
+                    &lt;/Not&gt;
+                &lt;/And&gt;
+            &lt;/Entry.Match&gt;
+            &lt;Entry.SortBy&gt;
+                &lt;Access /&gt;
+                &lt;Readonly /&gt;
+            &lt;/Entry.SortBy&gt;
+        &lt;/Entry&gt;
+
+        &lt;Entry DisplayName="Static Fields"&gt;
+            &lt;Entry.Match&gt;
+                &lt;And&gt;
+                    &lt;Kind Is="Field" /&gt;
+                    &lt;Static /&gt;
+                &lt;/And&gt;
+            &lt;/Entry.Match&gt;
+            &lt;Entry.SortBy&gt;
+                &lt;Kind Is="Member" /&gt;
+                &lt;Access /&gt;
+            &lt;/Entry.SortBy&gt;
+        &lt;/Entry&gt;
+
+        &lt;Entry DisplayName="Constants"&gt;
+            &lt;Entry.Match&gt;
+                &lt;Kind Is="Constant" /&gt;
+            &lt;/Entry.Match&gt;
+            &lt;Entry.SortBy&gt;
+                &lt;Kind Is="Member" /&gt;
+                &lt;Access /&gt;
+            &lt;/Entry.SortBy&gt;
+        &lt;/Entry&gt;
+
+        &lt;Entry DisplayName="Properties, Indexers"&gt;
+            &lt;Entry.Match&gt;
+                &lt;Or&gt;
+                    &lt;Kind Is="Property" /&gt;
+                    &lt;Kind Is="Indexer" /&gt;
+                &lt;/Or&gt;
+            &lt;/Entry.Match&gt;
+            &lt;Entry.SortBy&gt;
+                &lt;Access /&gt;
+            &lt;/Entry.SortBy&gt;
+        &lt;/Entry&gt;
+
+        &lt;Entry DisplayName="Constructors"&gt;
+            &lt;Entry.Match&gt;
+                &lt;Kind Is="Constructor" /&gt;
+            &lt;/Entry.Match&gt;
+            &lt;Entry.SortBy&gt;
+                &lt;Static /&gt;
+            &lt;/Entry.SortBy&gt;
+        &lt;/Entry&gt;
+        &lt;Entry DisplayName="Zenject"&gt;
+            &lt;Entry.Match&gt;
+                &lt;And&gt;
+                    &lt;Kind Is="Method" /&gt;
+                    &lt;HasAttribute Name="Zenject.InjectAttribute" /&gt;
+                &lt;/And&gt;
+            &lt;/Entry.Match&gt;
+        &lt;/Entry&gt;
+        &lt;Entry DisplayName="Init"&gt;
+            &lt;Entry.Match&gt;
+                &lt;And&gt;
+                    &lt;Kind Is="Method" /&gt;
+                    &lt;Name Is="Init" /&gt;
+                    &lt;Access Is="Public" /&gt;
+                &lt;/And&gt;
+            &lt;/Entry.Match&gt;
+        &lt;/Entry&gt;
+        &lt;Entry DisplayName="Unity Events"&gt;
+            &lt;Entry.Match&gt;
+                &lt;And&gt;
+                    &lt;Kind Is="Method" /&gt;
+                    &lt;Or&gt;
+                        &lt;Name Is="Awake" /&gt;
+                        &lt;Name Is="Start" /&gt;
+                        &lt;Name Is="OnEnable" /&gt;
+                        &lt;Name Is="Update" /&gt;
+                        &lt;Name Is="FixedUpdate" /&gt;
+                        &lt;Name Is="LateUpdate" /&gt;
+                        &lt;Name Is="OnDisable" /&gt;
+                        &lt;Name Is="OnDestroy" /&gt;
+                        &lt;Name Is="Reset" /&gt;
+                        &lt;Name Is="OnAnimatorIK" /&gt;
+                        &lt;Name Is="OnAnimatorMove" /&gt;
+                        &lt;Name Is="OnApplicationFocus" /&gt;
+                        &lt;Name Is="OnApplicationPause" /&gt;
+                        &lt;Name Is="OnApplicationQuit" /&gt;
+                        &lt;Name Is="OnAudioFilterRead" /&gt;
+                        &lt;Name Is="OnBecameInvisible" /&gt;
+                        &lt;Name Is="OnBecameVisible" /&gt;
+                        &lt;Name Is="OnCollisionEnter" /&gt;
+                        &lt;Name Is="OnCollisionEnter2D" /&gt;
+                        &lt;Name Is="OnCollisionExit" /&gt;
+                        &lt;Name Is="OnCollisionExit2D" /&gt;
+                        &lt;Name Is="OnCollisionStay" /&gt;
+                        &lt;Name Is="OnCollisionStay2D" /&gt;
+                        &lt;Name Is="OnConnectedToServer" /&gt;
+                        &lt;Name Is="OnControllerColliderHit" /&gt;
+                        &lt;Name Is="OnDisconnectedFromServer" /&gt;
+                        &lt;Name Is="OnDrawGizmos" /&gt;
+                        &lt;Name Is="OnDrawGizmosSelected" /&gt;
+                        &lt;Name Is="OnFailedToConnect" /&gt;
+                        &lt;Name Is="OnFailedToConnectToMasterServer" /&gt;
+                        &lt;Name Is="OnGUI" /&gt;
+                        &lt;Name Is="OnJointBreak" /&gt;
+                        &lt;Name Is="OnJointBreak2D" /&gt;
+                        &lt;Name Is="OnMasterServerEvent" /&gt;
+                        &lt;Name Is="OnMouseDown" /&gt;
+                        &lt;Name Is="OnMouseDrag" /&gt;
+                        &lt;Name Is="OnMouseEnter" /&gt;
+                        &lt;Name Is="OnMouseExit" /&gt;
+                        &lt;Name Is="OnMouseOver" /&gt;
+                        &lt;Name Is="OnMouseUp" /&gt;
+                        &lt;Name Is="OnMouseUpAsButton" /&gt;
+                        &lt;Name Is="OnNetworkInstantiate" /&gt;
+                        &lt;Name Is="OnParticleCollision" /&gt;
+                        &lt;Name Is="OnParticleSystemStopped" /&gt;
+                        &lt;Name Is="OnParticleTrigger" /&gt;
+                        &lt;Name Is="OnParticleUpdateJobScheduled" /&gt;
+                        &lt;Name Is="OnPlayerConnected" /&gt;
+                        &lt;Name Is="OnPlayerDisconnected" /&gt;
+                        &lt;Name Is="OnPostRender" /&gt;
+                        &lt;Name Is="OnPreCull" /&gt;
+                        &lt;Name Is="OnPreRender" /&gt;
+                        &lt;Name Is="OnRenderImage" /&gt;
+                        &lt;Name Is="OnRenderObject" /&gt;
+                        &lt;Name Is="OnSerializeNetworkView" /&gt;
+                        &lt;Name Is="OnServerInitialized" /&gt;
+                        &lt;Name Is="OnTransformChildrenChanged" /&gt;
+                        &lt;Name Is="OnTransformParentChanged" /&gt;
+                        &lt;Name Is="OnTriggerEnter" /&gt;
+                        &lt;Name Is="OnTriggerEnter2D" /&gt;
+                        &lt;Name Is="OnTriggerExit" /&gt;
+                        &lt;Name Is="OnTriggerExit2D" /&gt;
+                        &lt;Name Is="OnTriggerStay" /&gt;
+                        &lt;Name Is="OnTriggerStay2D" /&gt;
+                        &lt;Name Is="OnValidate" /&gt;
+                        &lt;Name Is="OnWillRenderObject" /&gt;
+                    &lt;/Or&gt;
+                &lt;/And&gt;
+            &lt;/Entry.Match&gt;
+        &lt;/Entry&gt;
+        &lt;Entry Priority="100" DisplayName="Interface Implementations"&gt;
+            &lt;Entry.Match&gt;
+                &lt;And&gt;
+                    &lt;Kind Is="Member" /&gt;
+                    &lt;ImplementsInterface /&gt;
+                &lt;/And&gt;
+            &lt;/Entry.Match&gt;
+            &lt;Entry.SortBy&gt;
+                &lt;ImplementsInterface Immediate="True" /&gt;
+            &lt;/Entry.SortBy&gt;
+        &lt;/Entry&gt;
+        &lt;Entry DisplayName="All other members"&gt;
+            &lt;Entry.Match&gt;
+                &lt;Kind Is="Method" /&gt;
+            &lt;/Entry.Match&gt;
+            &lt;Entry.SortBy&gt;
+                &lt;Access /&gt;
+            &lt;/Entry.SortBy&gt;
+        &lt;/Entry&gt;
+        &lt;Entry DisplayName="All other members" /&gt;
+        &lt;Entry DisplayName="Nested Types"&gt;
+            &lt;Entry.Match&gt;
+                &lt;Kind Is="Type" /&gt;
+            &lt;/Entry.Match&gt;
+        &lt;/Entry&gt;
+    &lt;/TypePattern&gt;
+&lt;/Patterns&gt;</s:String>
+	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=ArrangeAttributes/@EntryIndexedValue">HINT</s:String>
+	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=CheckNamespace/@EntryIndexedValue">DO_NOT_SHOW</s:String>
+	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=EnforceDoWhileStatementBraces/@EntryIndexedValue">HINT</s:String>
+	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=EnforceFixedStatementBraces/@EntryIndexedValue">HINT</s:String>
+	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=EnforceForeachStatementBraces/@EntryIndexedValue">HINT</s:String>
+	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=EnforceForStatementBraces/@EntryIndexedValue">HINT</s:String>
+	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=EnforceIfStatementBraces/@EntryIndexedValue">HINT</s:String>
+	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=EnforceLockStatementBraces/@EntryIndexedValue">HINT</s:String>
+	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=EnforceUsingStatementBraces/@EntryIndexedValue">HINT</s:String>
+	<s:String x:Key="/Default/CodeInspection/Highlighting/InspectionSeverities/=EnforceWhileStatementBraces/@EntryIndexedValue">HINT</s:String>
+	
+	<s:String x:Key="/Default/CodeStyle/CodeCleanup/Profiles/=C_0023_0020Cleanup/@EntryIndexedValue">&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;Profile name="C# Cleanup"&gt;&lt;CSCodeStyleAttributes ArrangeTypeAccessModifier="True" ArrangeTypeMemberAccessModifier="True" SortModifiers="True" RemoveRedundantParentheses="True" AddMissingParentheses="True" ArrangeBraces="True" ArrangeAttributes="True" ArrangeArgumentsStyle="True" ArrangeCodeBodyStyle="True" ArrangeVarStyle="True" /&gt;&lt;CSOptimizeUsings&gt;&lt;OptimizeUsings&gt;True&lt;/OptimizeUsings&gt;&lt;EmbraceInRegion&gt;False&lt;/EmbraceInRegion&gt;&lt;RegionName&gt;&lt;/RegionName&gt;&lt;/CSOptimizeUsings&gt;&lt;CSReformatCode&gt;True&lt;/CSReformatCode&gt;&lt;XAMLCollapseEmptyTags&gt;False&lt;/XAMLCollapseEmptyTags&gt;&lt;RemoveCodeRedundancies&gt;True&lt;/RemoveCodeRedundancies&gt;&lt;CSArrangeQualifiers&gt;True&lt;/CSArrangeQualifiers&gt;&lt;IDEA_SETTINGS&gt;&amp;lt;profile version="1.0"&amp;gt;
+  &amp;lt;option name="myName" value="C# Cleanup" /&amp;gt;
+  &amp;lt;inspection_tool class="WrongPropertyKeyValueDelimiter" enabled="false" level="WARNING" enabled_by_default="false" /&amp;gt;
+&amp;lt;/profile&amp;gt;&lt;/IDEA_SETTINGS&gt;&lt;CSReorderTypeMembers&gt;True&lt;/CSReorderTypeMembers&gt;&lt;CSMakeFieldReadonly&gt;True&lt;/CSMakeFieldReadonly&gt;&lt;RIDER_SETTINGS&gt;&amp;lt;profile&amp;gt;
+  &amp;lt;Language id="AsciiDoc"&amp;gt;
+    &amp;lt;Reformat&amp;gt;false&amp;lt;/Reformat&amp;gt;
+  &amp;lt;/Language&amp;gt;
+  &amp;lt;Language id="EditorConfig"&amp;gt;
+    &amp;lt;Reformat&amp;gt;false&amp;lt;/Reformat&amp;gt;
+  &amp;lt;/Language&amp;gt;
+  &amp;lt;Language id="HTML"&amp;gt;
+    &amp;lt;Rearrange&amp;gt;false&amp;lt;/Rearrange&amp;gt;
+    &amp;lt;Reformat&amp;gt;false&amp;lt;/Reformat&amp;gt;
+    &amp;lt;OptimizeImports&amp;gt;false&amp;lt;/OptimizeImports&amp;gt;
+  &amp;lt;/Language&amp;gt;
+  &amp;lt;Language id="Handlebars"&amp;gt;
+    &amp;lt;Reformat&amp;gt;false&amp;lt;/Reformat&amp;gt;
+  &amp;lt;/Language&amp;gt;
+  &amp;lt;Language id="Ini"&amp;gt;
+    &amp;lt;Reformat&amp;gt;false&amp;lt;/Reformat&amp;gt;
+  &amp;lt;/Language&amp;gt;
+  &amp;lt;Language id="JSON"&amp;gt;
+    &amp;lt;Reformat&amp;gt;false&amp;lt;/Reformat&amp;gt;
+  &amp;lt;/Language&amp;gt;
+  &amp;lt;Language id="Markdown"&amp;gt;
+    &amp;lt;Reformat&amp;gt;false&amp;lt;/Reformat&amp;gt;
+  &amp;lt;/Language&amp;gt;
+  &amp;lt;Language id="Properties"&amp;gt;
+    &amp;lt;Reformat&amp;gt;false&amp;lt;/Reformat&amp;gt;
+  &amp;lt;/Language&amp;gt;
+  &amp;lt;Language id="RELAX-NG"&amp;gt;
+    &amp;lt;Reformat&amp;gt;false&amp;lt;/Reformat&amp;gt;
+  &amp;lt;/Language&amp;gt;
+  &amp;lt;Language id="SQL"&amp;gt;
+    &amp;lt;Reformat&amp;gt;false&amp;lt;/Reformat&amp;gt;
+  &amp;lt;/Language&amp;gt;
+  &amp;lt;Language id="XML"&amp;gt;
+    &amp;lt;Rearrange&amp;gt;false&amp;lt;/Rearrange&amp;gt;
+    &amp;lt;Reformat&amp;gt;false&amp;lt;/Reformat&amp;gt;
+    &amp;lt;OptimizeImports&amp;gt;false&amp;lt;/OptimizeImports&amp;gt;
+  &amp;lt;/Language&amp;gt;
+  &amp;lt;Language id="yaml"&amp;gt;
+    &amp;lt;Reformat&amp;gt;false&amp;lt;/Reformat&amp;gt;
+  &amp;lt;/Language&amp;gt;
+&amp;lt;/profile&amp;gt;&lt;/RIDER_SETTINGS&gt;&lt;/Profile&gt;</s:String>
+	<s:String x:Key="/Default/CodeStyle/CodeCleanup/RecentlyUsedProfile/@EntryValue">Default: Full Cleanup</s:String>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/BRACES_FOR_DOWHILE/@EntryValue">RequiredForMultiline</s:String>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/BRACES_FOR_FIXED/@EntryValue">RequiredForMultiline</s:String>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/BRACES_FOR_FOR/@EntryValue">RequiredForMultiline</s:String>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/BRACES_FOR_FOREACH/@EntryValue">RequiredForMultiline</s:String>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/BRACES_FOR_IFELSE/@EntryValue">RequiredForMultiline</s:String>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/BRACES_FOR_LOCK/@EntryValue">RequiredForMultiline</s:String>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/BRACES_FOR_USING/@EntryValue">RequiredForMultiline</s:String>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/BRACES_FOR_WHILE/@EntryValue">RequiredForMultiline</s:String>
+	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpCodeStyle/BRACES_REDUNDANT/@EntryValue">False</s:Boolean>
+	<s:Int64 x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/BLANK_LINES_AFTER_CONTROL_TRANSFER_STATEMENTS/@EntryValue">1</s:Int64>
+	<s:Int64 x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/BLANK_LINES_AFTER_MULTILINE_STATEMENTS/@EntryValue">1</s:Int64>
+	<s:Int64 x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/BLANK_LINES_BEFORE_MULTILINE_STATEMENTS/@EntryValue">1</s:Int64>
+	<s:Int64 x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/BLANK_LINES_BEFORE_SINGLE_LINE_COMMENT/@EntryValue">1</s:Int64>
+	
+	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/INT_ALIGN_SWITCH_EXPRESSIONS/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/INT_ALIGN_SWITCH_SECTIONS/@EntryValue">True</s:Boolean>
+	<s:Int64 x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/KEEP_BLANK_LINES_IN_CODE/@EntryValue">1</s:Int64>
+	<s:Int64 x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/KEEP_BLANK_LINES_IN_DECLARATIONS/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/KEEP_EXISTING_EXPR_MEMBER_ARRANGEMENT/@EntryValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/KEEP_EXISTING_INITIALIZER_ARRANGEMENT/@EntryValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/KEEP_EXISTING_SWITCH_EXPRESSION_ARRANGEMENT/@EntryValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/KEEP_USER_LINEBREAKS/@EntryValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/PLACE_ACCESSOR_WITH_ATTRS_HOLDER_ON_SINGLE_LINE/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/PLACE_ACCESSORHOLDER_ATTRIBUTE_ON_SAME_LINE_EX/@EntryValue">NEVER</s:String>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/PLACE_FIELD_ATTRIBUTE_ON_SAME_LINE_EX/@EntryValue">NEVER</s:String>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/PLACE_SIMPLE_EMBEDDED_STATEMENT_ON_SAME_LINE/@EntryValue">NEVER</s:String>
+	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/PLACE_SIMPLE_ENUM_ON_SINGLE_LINE/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/SIMPLE_EMBEDDED_STATEMENT_STYLE/@EntryValue">LINE_BREAK</s:String>
+	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/STICK_COMMENT/@EntryValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/WRAP_BEFORE_BINARY_OPSIGN/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/WRAP_CHAINED_METHOD_CALLS/@EntryValue">CHOP_ALWAYS</s:String>
+	<s:Int64 x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/WRAP_LIMIT/@EntryValue">140</s:Int64>
+	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/WRAP_LINES/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/WRAP_OBJECT_AND_COLLECTION_INITIALIZER_STYLE/@EntryValue">CHOP_ALWAYS</s:String>
+	<s:String x:Key="/Default/CodeStyle/CSharpFileLayoutPatterns/Pattern/@EntryValue">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;Patterns xmlns="urn:schemas-jetbrains-com:member-reordering-patterns"&gt;
+    &lt;TypePattern DisplayName="Non-reorderable types"&gt;
+        &lt;TypePattern.Match&gt;
+            &lt;Or&gt;
+                &lt;And&gt;
+                    &lt;Kind Is="Interface" /&gt;
+                    &lt;Or&gt;
+                        &lt;HasAttribute Name="System.Runtime.InteropServices.InterfaceTypeAttribute" /&gt;
+                        &lt;HasAttribute Name="System.Runtime.InteropServices.ComImport" /&gt;
+                    &lt;/Or&gt;
+                &lt;/And&gt;
+                &lt;Kind Is="Struct" /&gt;
+                &lt;HasAttribute Name="JetBrains.Annotations.NoReorderAttribute" /&gt;
+                &lt;HasAttribute Name="JetBrains.Annotations.NoReorder" /&gt;
+            &lt;/Or&gt;
+        &lt;/TypePattern.Match&gt;
+    &lt;/TypePattern&gt;
+    &lt;TypePattern DisplayName="Default Pattern"&gt;
+        &lt;Entry Priority="100" DisplayName="Public Delegates"&gt;
+            &lt;Entry.Match&gt;
+                &lt;And&gt;
+                    &lt;Access Is="Public" /&gt;
+                    &lt;Kind Is="Delegate" /&gt;
+                &lt;/And&gt;
+            &lt;/Entry.Match&gt;
+            &lt;Entry.SortBy&gt;
+                &lt;Name /&gt;
+            &lt;/Entry.SortBy&gt;
+        &lt;/Entry&gt;
+        &lt;Entry Priority="100" DisplayName="Public Enums"&gt;
+            &lt;Entry.Match&gt;
+                &lt;And&gt;
+                    &lt;Access Is="Public" /&gt;
+                    &lt;Kind Is="Enum" /&gt;
+                &lt;/And&gt;
+            &lt;/Entry.Match&gt;
+            &lt;Entry.SortBy&gt;
+                &lt;Name /&gt;
+            &lt;/Entry.SortBy&gt;
+        &lt;/Entry&gt;
+        &lt;Entry DisplayName="Serializable Fields"&gt;
+            &lt;Entry.Match&gt;
+                &lt;And&gt;
+                    &lt;Kind Is="Field" /&gt;
+                    &lt;HasAttribute Name="UnityEngine.SerializeField" /&gt;
+                    &lt;Not&gt;
+                        &lt;Static /&gt;
+                    &lt;/Not&gt;
+                    &lt;Not&gt;
+                        &lt;Readonly /&gt;
+                    &lt;/Not&gt;
+                &lt;/And&gt;
+            &lt;/Entry.Match&gt;
+            &lt;Entry.SortBy&gt;
+                &lt;Name /&gt;
+            &lt;/Entry.SortBy&gt;
+        &lt;/Entry&gt;
+        &lt;Entry DisplayName="Fields"&gt;
+            &lt;Entry.Match&gt;
+                &lt;And&gt;
+                    &lt;Kind Is="Field" /&gt;
+                    &lt;Not&gt;
+                        &lt;Static /&gt;
+                    &lt;/Not&gt;
+                    &lt;Not&gt;
+                        &lt;HasAttribute Name="UnityEngine.SerializeField" /&gt;
+                    &lt;/Not&gt;
+                &lt;/And&gt;
+            &lt;/Entry.Match&gt;
+            &lt;Entry.SortBy&gt;
+                &lt;Access /&gt;
+                &lt;Readonly /&gt;
+            &lt;/Entry.SortBy&gt;
+        &lt;/Entry&gt;
+
+        &lt;Entry DisplayName="Static Fields"&gt;
+            &lt;Entry.Match&gt;
+                &lt;And&gt;
+                    &lt;Kind Is="Field" /&gt;
+                    &lt;Static /&gt;
+                &lt;/And&gt;
+            &lt;/Entry.Match&gt;
+            &lt;Entry.SortBy&gt;
+                &lt;Kind Is="Member" /&gt;
+                &lt;Access /&gt;
+            &lt;/Entry.SortBy&gt;
+        &lt;/Entry&gt;
+
+        &lt;Entry DisplayName="Constants"&gt;
+            &lt;Entry.Match&gt;
+                &lt;Kind Is="Constant" /&gt;
+            &lt;/Entry.Match&gt;
+            &lt;Entry.SortBy&gt;
+                &lt;Kind Is="Member" /&gt;
+                &lt;Access /&gt;
+            &lt;/Entry.SortBy&gt;
+        &lt;/Entry&gt;
+
+        &lt;Entry DisplayName="Properties, Indexers"&gt;
+            &lt;Entry.Match&gt;
+                &lt;Or&gt;
+                    &lt;Kind Is="Property" /&gt;
+                    &lt;Kind Is="Indexer" /&gt;
+                &lt;/Or&gt;
+            &lt;/Entry.Match&gt;
+            &lt;Entry.SortBy&gt;
+                &lt;Access /&gt;
+            &lt;/Entry.SortBy&gt;
+        &lt;/Entry&gt;
+
+        &lt;Entry DisplayName="Constructors"&gt;
+            &lt;Entry.Match&gt;
+                &lt;Kind Is="Constructor" /&gt;
+            &lt;/Entry.Match&gt;
+            &lt;Entry.SortBy&gt;
+                &lt;Static /&gt;
+            &lt;/Entry.SortBy&gt;
+        &lt;/Entry&gt;
+        &lt;Entry DisplayName="Zenject"&gt;
+            &lt;Entry.Match&gt;
+                &lt;And&gt;
+                    &lt;Kind Is="Method" /&gt;
+                    &lt;HasAttribute Name="Zenject.InjectAttribute" /&gt;
+                &lt;/And&gt;
+            &lt;/Entry.Match&gt;
+        &lt;/Entry&gt;
+        &lt;Entry DisplayName="Init"&gt;
+            &lt;Entry.Match&gt;
+                &lt;And&gt;
+                    &lt;Kind Is="Method" /&gt;
+                    &lt;Name Is="Init" /&gt;
+                    &lt;Access Is="Public" /&gt;
+                &lt;/And&gt;
+            &lt;/Entry.Match&gt;
+        &lt;/Entry&gt;
+        &lt;Entry DisplayName="Unity Events"&gt;
+            &lt;Entry.Match&gt;
+                &lt;And&gt;
+                    &lt;Kind Is="Method" /&gt;
+                    &lt;Or&gt;
+                        &lt;Name Is="Awake" /&gt;
+                        &lt;Name Is="Start" /&gt;
+                        &lt;Name Is="OnEnable" /&gt;
+                        &lt;Name Is="Update" /&gt;
+                        &lt;Name Is="FixedUpdate" /&gt;
+                        &lt;Name Is="LateUpdate" /&gt;
+                        &lt;Name Is="OnDisable" /&gt;
+                        &lt;Name Is="OnDestroy" /&gt;
+                        &lt;Name Is="Reset" /&gt;
+                        &lt;Name Is="OnAnimatorIK" /&gt;
+                        &lt;Name Is="OnAnimatorMove" /&gt;
+                        &lt;Name Is="OnApplicationFocus" /&gt;
+                        &lt;Name Is="OnApplicationPause" /&gt;
+                        &lt;Name Is="OnApplicationQuit" /&gt;
+                        &lt;Name Is="OnAudioFilterRead" /&gt;
+                        &lt;Name Is="OnBecameInvisible" /&gt;
+                        &lt;Name Is="OnBecameVisible" /&gt;
+                        &lt;Name Is="OnCollisionEnter" /&gt;
+                        &lt;Name Is="OnCollisionEnter2D" /&gt;
+                        &lt;Name Is="OnCollisionExit" /&gt;
+                        &lt;Name Is="OnCollisionExit2D" /&gt;
+                        &lt;Name Is="OnCollisionStay" /&gt;
+                        &lt;Name Is="OnCollisionStay2D" /&gt;
+                        &lt;Name Is="OnConnectedToServer" /&gt;
+                        &lt;Name Is="OnControllerColliderHit" /&gt;
+                        &lt;Name Is="OnDisconnectedFromServer" /&gt;
+                        &lt;Name Is="OnDrawGizmos" /&gt;
+                        &lt;Name Is="OnDrawGizmosSelected" /&gt;
+                        &lt;Name Is="OnFailedToConnect" /&gt;
+                        &lt;Name Is="OnFailedToConnectToMasterServer" /&gt;
+                        &lt;Name Is="OnGUI" /&gt;
+                        &lt;Name Is="OnJointBreak" /&gt;
+                        &lt;Name Is="OnJointBreak2D" /&gt;
+                        &lt;Name Is="OnMasterServerEvent" /&gt;
+                        &lt;Name Is="OnMouseDown" /&gt;
+                        &lt;Name Is="OnMouseDrag" /&gt;
+                        &lt;Name Is="OnMouseEnter" /&gt;
+                        &lt;Name Is="OnMouseExit" /&gt;
+                        &lt;Name Is="OnMouseOver" /&gt;
+                        &lt;Name Is="OnMouseUp" /&gt;
+                        &lt;Name Is="OnMouseUpAsButton" /&gt;
+                        &lt;Name Is="OnNetworkInstantiate" /&gt;
+                        &lt;Name Is="OnParticleCollision" /&gt;
+                        &lt;Name Is="OnParticleSystemStopped" /&gt;
+                        &lt;Name Is="OnParticleTrigger" /&gt;
+                        &lt;Name Is="OnParticleUpdateJobScheduled" /&gt;
+                        &lt;Name Is="OnPlayerConnected" /&gt;
+                        &lt;Name Is="OnPlayerDisconnected" /&gt;
+                        &lt;Name Is="OnPostRender" /&gt;
+                        &lt;Name Is="OnPreCull" /&gt;
+                        &lt;Name Is="OnPreRender" /&gt;
+                        &lt;Name Is="OnRenderImage" /&gt;
+                        &lt;Name Is="OnRenderObject" /&gt;
+                        &lt;Name Is="OnSerializeNetworkView" /&gt;
+                        &lt;Name Is="OnServerInitialized" /&gt;
+                        &lt;Name Is="OnTransformChildrenChanged" /&gt;
+                        &lt;Name Is="OnTransformParentChanged" /&gt;
+                        &lt;Name Is="OnTriggerEnter" /&gt;
+                        &lt;Name Is="OnTriggerEnter2D" /&gt;
+                        &lt;Name Is="OnTriggerExit" /&gt;
+                        &lt;Name Is="OnTriggerExit2D" /&gt;
+                        &lt;Name Is="OnTriggerStay" /&gt;
+                        &lt;Name Is="OnTriggerStay2D" /&gt;
+                        &lt;Name Is="OnValidate" /&gt;
+                        &lt;Name Is="OnWillRenderObject" /&gt;
+                    &lt;/Or&gt;
+                &lt;/And&gt;
+            &lt;/Entry.Match&gt;
+        &lt;/Entry&gt;
+        &lt;Entry DisplayName="All other members"&gt;
+            &lt;Entry.Match&gt;
+                &lt;Kind Is="Method" /&gt;
+            &lt;/Entry.Match&gt;
+            &lt;Entry.SortBy&gt;
+                &lt;Access /&gt;
+            &lt;/Entry.SortBy&gt;
+        &lt;/Entry&gt;
+        &lt;Entry DisplayName="All other members" /&gt;
+        &lt;Entry DisplayName="Nested Types"&gt;
+            &lt;Entry.Match&gt;
+                &lt;Kind Is="Type" /&gt;
+            &lt;/Entry.Match&gt;
+        &lt;/Entry&gt;
+    &lt;/TypePattern&gt;
+&lt;/Patterns&gt;</s:String>
+	<s:Boolean x:Key="/Default/CodeStyle/CSharpUsing/CanUseGlobalAlias/@EntryValue">False</s:Boolean>
+	<s:String x:Key="/Default/CodeStyle/CSharpVarKeywordUsage/ForBuiltInTypes/@EntryValue">UseExplicitType</s:String>
+	<s:String x:Key="/Default/CodeStyle/CSharpVarKeywordUsage/ForOtherTypes/@EntryValue">UseVarWhenEvident</s:String>
+	<s:String x:Key="/Default/CodeStyle/CSharpVarKeywordUsage/ForSimpleTypes/@EntryValue">UseExplicitType</s:String>
+	<s:Boolean x:Key="/Default/CodeStyle/EncapsulateField/UpdateExternalUsagesOnly/@EntryValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeStyle/LiveTemplatesUseVar/UseVar/@EntryValue">False</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeStyle/Naming/CSharpNaming/ApplyAutoDetectedRules/@EntryValue">False</s:Boolean>
+	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=PrivateInstanceFields/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="m_" Suffix="" Style="AaBb" /&gt;</s:String>
+	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=PrivateStaticFields/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="m_" Suffix="" Style="AaBb" /&gt;</s:String>
+	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=PrivateStaticReadonly/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="m_" Suffix="" Style="AaBb" /&gt;</s:String>
+	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/PredefinedNamingRules/=PublicFields/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;</s:String>
+	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/UserRules/=15b5b1f1_002D457c_002D4ca6_002Db278_002D5615aedc07d3/@EntryIndexedValue">&lt;Policy&gt;&lt;Descriptor Staticness="Static" AccessRightKinds="Private" Description="Static readonly fields (private)"&gt;&lt;ElementKinds&gt;&lt;Kind Name="READONLY_FIELD" /&gt;&lt;/ElementKinds&gt;&lt;/Descriptor&gt;&lt;Policy Inspect="True" Prefix="m_" Suffix="" Style="AaBb" /&gt;&lt;/Policy&gt;</s:String>
+	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/UserRules/=4a98fdf6_002D7d98_002D4f5a_002Dafeb_002Dea44ad98c70c/@EntryIndexedValue">&lt;Policy&gt;&lt;Descriptor Staticness="Instance" AccessRightKinds="Private" Description="Instance fields (private)"&gt;&lt;ElementKinds&gt;&lt;Kind Name="FIELD" /&gt;&lt;Kind Name="READONLY_FIELD" /&gt;&lt;/ElementKinds&gt;&lt;/Descriptor&gt;&lt;Policy Inspect="True" Prefix="m_" Suffix="" Style="AaBb" /&gt;&lt;/Policy&gt;</s:String>
+	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/UserRules/=53eecf85_002Dd821_002D40e8_002Dac97_002Dfdb734542b84/@EntryIndexedValue">&lt;Policy&gt;&lt;Descriptor Staticness="Instance" AccessRightKinds="Protected, ProtectedInternal, Internal, Public, PrivateProtected" Description="Instance fields (not private)"&gt;&lt;ElementKinds&gt;&lt;Kind Name="FIELD" /&gt;&lt;Kind Name="READONLY_FIELD" /&gt;&lt;/ElementKinds&gt;&lt;/Descriptor&gt;&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;&lt;/Policy&gt;</s:String>
+	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/UserRules/=5a6a3de3_002Df49a_002D4fd3_002Dbae5_002Da780e2b0fd87/@EntryIndexedValue">&lt;Policy&gt;&lt;Descriptor Staticness="Any" AccessRightKinds="Any" Description=""&gt;&lt;ElementKinds /&gt;&lt;/Descriptor&gt;&lt;Policy Inspect="False" Prefix="" Suffix="" Style="AaBb" /&gt;&lt;/Policy&gt;</s:String>
+	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/UserRules/=5f0fdb63_002Dc892_002D4d2c_002D9324_002D15c80b22a7ef/@EntryIndexedValue">&lt;Policy&gt;&lt;Descriptor Staticness="Any" AccessRightKinds="Any" Description=""&gt;&lt;ElementKinds /&gt;&lt;/Descriptor&gt;&lt;Policy Inspect="False" Prefix="" Suffix="" Style="AaBb" /&gt;&lt;/Policy&gt;</s:String>
+	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/UserRules/=70345118_002D4b40_002D4ece_002D937c_002Dbbeb7a0b2e70/@EntryIndexedValue">&lt;Policy&gt;&lt;Descriptor Staticness="Static" AccessRightKinds="Protected, ProtectedInternal, Internal, Public, PrivateProtected" Description="Static fields (not private)"&gt;&lt;ElementKinds&gt;&lt;Kind Name="FIELD" /&gt;&lt;/ElementKinds&gt;&lt;/Descriptor&gt;&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;&lt;/Policy&gt;</s:String>
+	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/UserRules/=f111c328_002Dbe32_002D4ea0_002D91f1_002D6389e8e43945/@EntryIndexedValue">&lt;Policy&gt;&lt;Descriptor Staticness="Any" AccessRightKinds="Any" Description=""&gt;&lt;ElementKinds /&gt;&lt;/Descriptor&gt;&lt;Policy Inspect="False" Prefix="" Suffix="" Style="AaBb" /&gt;&lt;/Policy&gt;</s:String>
+	<s:String x:Key="/Default/CodeStyle/Naming/CSharpNaming/UserRules/=f9fce829_002De6f4_002D4cb2_002D80f1_002D5497c44f51df/@EntryIndexedValue">&lt;Policy&gt;&lt;Descriptor Staticness="Static" AccessRightKinds="Private" Description="Static fields (private)"&gt;&lt;ElementKinds&gt;&lt;Kind Name="FIELD" /&gt;&lt;/ElementKinds&gt;&lt;/Descriptor&gt;&lt;Policy Inspect="True" Prefix="m_" Suffix="" Style="AaBb" /&gt;&lt;/Policy&gt;</s:String>
+	<s:String x:Key="/Default/CodeStyle/Naming/XamlNaming/UserRules/=NAMESPACE_005FALIAS/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="aaBb" /&gt;</s:String>
+	<s:String x:Key="/Default/CodeStyle/Naming/XamlNaming/UserRules/=XAML_005FFIELD/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;</s:String>
+	<s:String x:Key="/Default/CodeStyle/Naming/XamlNaming/UserRules/=XAML_005FRESOURCE/@EntryIndexedValue">&lt;Policy Inspect="True" Prefix="" Suffix="" Style="AaBb" /&gt;</s:String>
+	<s:Boolean x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=BDEEE50C3094D649A55F3405A43B44EB/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=BDEEE50C3094D649A55F3405A43B44EB/RelativePath/@EntryValue"></s:String>
+	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=FileBDEEE50C3094D649A55F3405A43B44EB/@KeyIndexDefined">True</s:Boolean>
+	<s:Double x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=FileBDEEE50C3094D649A55F3405A43B44EB/RelativePriority/@EntryValue">1</s:Double>
+	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpKeepExistingMigration/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpPlaceEmbeddedOnSameLineMigration/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ECSharpUseContinuousIndentInsideBracesMigration/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002EMemberReordering_002EMigrations_002ECSharpFileLayoutPatternRemoveIsAttributeUpgrade/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EAlwaysTreatStructAsNotReorderableMigration/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EMigrateBlankLinesAroundFieldToBlankLinesAroundProperty/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/Environment/SettingsMigration/IsMigratorApplied/=JetBrains_002EReSharper_002EPsi_002ECSharp_002ECodeStyle_002ESettingsUpgrade_002EPredefinedNamingRulesToUserRulesUpgrade/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Addressables/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Initializable/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Murka/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Postprocess/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=preloader/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Refetch/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
